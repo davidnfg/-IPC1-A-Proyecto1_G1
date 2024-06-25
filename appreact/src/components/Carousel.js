@@ -1,37 +1,29 @@
+import React from 'react'
+import banner_image from "./images/banner_img.jpg"
+import dolar_icon from "./images/dolar.png"
+import info_icon from "./images/info.png"
+import { Button } from 'react-bootstrap'
 
-import React from 'react';
-import Carousel from 'react-bootstrap/Carousel';
-import ExampleCarouselImage from './CarouselImage';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import image1 from './images/imagen1.png'; // Asegúrate de usar las rutas correctas
-import image2 from './images/imagen2.jpg';
-import image3 from './images/imagen3.jpg';
-
-function IndividualIntervalsExample() {
+const Carousel = () => {
   return (
-    <Carousel>
-      <Carousel.Item interval={5000}>
-        <ExampleCarouselImage text="First slide" image={image1} />
-        <Carousel.Caption>
-          
-          <p className='slidecolor'>YA DISPONIBLE</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item interval={5000}>
-        <ExampleCarouselImage text="Second slide" image={image2} />
-        <Carousel.Caption >
-          <h3 className='slidecolor'>YA DISPONIBLE</h3>
-          
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item interval={5000}>
-        <ExampleCarouselImage text="Third slide" image={image3} />
-        <Carousel.Caption>
-          <h3 className='slidecolor'>PROXIMAMENTE</h3>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
-  );
+    <div className='hero'>
+      <img src={banner_image} alt='' className='banner-img'/>
+      <div className='hero-caption'>
+        <p>
+        Gracias a un descubrimiento, un grupo de científicos 
+        y exploradores, encabezados por Cooper, se embarcan 
+        en un viaje espacial para encontrar un lugar con las 
+        condiciones necesarias para reemplazar a la Tierra y 
+        comenzar una nueva vida allí.
+        </p>
+        <div className='hero-btns'>
+          <Button className='btn'><img src={dolar_icon} alt=''/>Alquilar</Button>
+          <Button className='btn dark-btn'><img src={info_icon} alt=''/>Información</Button>
+        </div>
+      </div>
+    </div>
+  )
 }
 
-export default IndividualIntervalsExample;
+export default Carousel
+

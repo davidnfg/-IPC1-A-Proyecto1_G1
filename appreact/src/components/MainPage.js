@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Card, Button, Offcanvas, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/MainPage.css'; // Asegúrate de importar tu archivo CSS
-import IndividualIntervalsExample from './Carousel';
+import Carousel from './Carousel';
 
 const MainPage = () => {
   // Aquí deberías cargar las películas desde una API o base de datos
@@ -42,7 +42,7 @@ const MainPage = () => {
           </Offcanvas.Body>
         </Offcanvas>
         <div className="carousel-section">
-          <IndividualIntervalsExample />
+          <Carousel />
         </div>
         <div className="movies-section">
           <Row>
