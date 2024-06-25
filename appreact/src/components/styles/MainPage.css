@@ -1,0 +1,84 @@
+/* Estilos para el modo oscuro */
+.dark-mode {
+    background-color: #121212;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #121212;
+    z-index: 1000;
+  }
+  
+  .menu-button {
+    margin-right: 5px;
+    opacity: 9; /* Asegúrate de que el botón siempre sea visible */
+  }
+  
+  .netflix-title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.5em;
+    color: #e50914;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  
+  /* Estilos para las tarjetas en modo oscuro */
+  .dark-card {
+    background-color: #1f1f1f;
+    color: white;
+  }
+  
+  .offcanvas-header, .offcanvas-body {
+    background-color: #1f1f1f;
+    color: white;
+  }
+  
+  /* Estilos adicionales para elementos del offcanvas */
+  .nav-link {
+    color: #e50914 !important;
+  }
+  
+  .nav-link:hover {
+    color: #f40612 !important;
+  }
+
+  .slidecolor{
+    background-color: #1f1f1f;
+    color: #ffffff !important;
+    font-weight: bold;
+    font-size: 3em;
+    
+  }
+  /*Espacio para el slide de pelis*/
+  .carousel-section {
+    margin-top: 80px; /* Ajusta este valor si necesitas más o menos espacio */
+    width: 100%;
+    
+  }
+
+  /* Espacio para la sección de películas */
+.movies-section {
+    margin-top: 1000px; /* Ajusta este valor si necesitas más o menos espacio */
+    flex: 1;
+  }
+  /* Personalizar el botón de cierre del offcanvas */
+.custom-offcanvas-header .btn-close {
+    filter: invert(1);
+  }
+  
+  

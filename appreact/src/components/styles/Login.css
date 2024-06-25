@@ -1,0 +1,16 @@
+.login-background {
+    background-image: url('../images/fondoLogin.jpg'); /* Aquí puedes poner la URL de tu imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
