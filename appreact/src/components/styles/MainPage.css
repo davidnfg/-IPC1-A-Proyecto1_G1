@@ -73,9 +73,16 @@
 
   /* Espacio para la sección de películas */
 .movies-section {
-    margin-top: 1000px; /* Ajusta este valor si necesitas más o menos espacio */
-    flex: 1;
+    margin-top: 50px; /* Ajusta este valor si necesitas más o menos espacio */
+    text-align: center;
   }
+  
+  .category-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+
   /* Personalizar el botón de cierre del offcanvas */
 .custom-offcanvas-header .btn-close {
     filter: invert(1);
@@ -130,4 +137,5 @@
   .hero-btns .btn.dark-btn:hover{
     background: #6d6d6e66;
   }
+  
   

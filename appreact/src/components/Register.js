@@ -21,22 +21,45 @@ const Register = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí deberías validar y enviar los datos de registro
     if (formData.firstName && formData.lastName && formData.email && formData.password && formData.gender) {
-      Swal.fire({
-        title: "Hecho!",
-        text: "Registrado correctamente.",
-        icon: "success"
-      }).then(() => {
-        navigate('/');
-      });
+      try {
+        const response = await fetch('http://localhost:3000/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        const result = await response.json();
+        if (response.ok) {
+          Swal.fire({
+            title: "Hecho!",
+            text: result.message,
+            icon: "success"
+          }).then(() => {
+            navigate('/');
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: result.message,
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Algo salió mal. Por favor intenta de nuevo.",
+        });
+      }
     } else {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Algo paso mal :(",
+        text: "Todos los campos son obligatorios",
       });
     }
   };
@@ -106,7 +129,7 @@ const Register = () => {
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Seleciona tu genero</option>
+                  <option value="">Selecciona tu genero</option>
                   <option value="Masculino">Masculino</option>
                   <option value="Femenino">Femenino</option>
                   <option value="Otro">Otro</option>
@@ -138,7 +161,3 @@ const Register = () => {
 };
 
 export default Register;
-
-
-
-

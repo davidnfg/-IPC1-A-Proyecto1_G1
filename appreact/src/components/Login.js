@@ -6,20 +6,43 @@ import './styles/Login.css';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [correo, setCorreo] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí deberías validar los datos de login
-    if (correo && password) {
-      Swal.fire({
-        title: "Bienvenido!",
-        text: "Inicio de sesión exitoso!",
-        icon: "success"
-      }).then(() => {
-        navigate('/main');
-      });
+    if (email && password) {
+      try {
+        const response = await fetch('http://localhost:3000/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+        const result = await response.json();
+        if (response.ok) {
+          Swal.fire({
+            title: "Bienvenido!",
+            text: result.message,
+            icon: "success"
+          }).then(() => {
+            navigate('/main');
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: result.message,
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Algo salió mal. Por favor intenta de nuevo.",
+        });
+      }
     } else {
       Swal.fire({
         icon: "error",
@@ -42,12 +65,12 @@ const Login = () => {
             <form onSubmit={handleSubmit} className='form-signin w-100 m-auto'>
               <div className="form-floating mb-3" style={{ width: "100%" }}>
                 <input
-                  type="String"
+                  type="email"
                   className="form-control"
                   id="floatingInput"
                   placeholder="example@correo.com"
-                  onChange={(e) => setCorreo(e.target.value)}
-                  value={correo}
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                   required
                 />
                 <label htmlFor="floatingInput">Correo</label>
@@ -62,7 +85,7 @@ const Login = () => {
                   value={password}
                   required
                 />
-                <label htmlFor="floatingPassword">Password</label>
+                <label htmlFor="floatingPassword">Contraseña</label>
               </div>
               <div className="text-center mb-3">
                 <button type="submit" className="btn btn-outline-primary btn-lg">Iniciar Sesión</button>
@@ -79,6 +102,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-

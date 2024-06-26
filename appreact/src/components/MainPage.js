@@ -1,16 +1,35 @@
+
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Button, Offcanvas, Nav } from 'react-bootstrap';
+import { Container, Row, Col, Offcanvas, Nav, Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/MainPage.css'; // Asegúrate de importar tu archivo CSS
-import Carousel from './Carousel';
+import Banner from './Hero'; 
+import FlipCard from './FlipCard';
 
 const MainPage = () => {
-  // Aquí deberías cargar las películas desde una API o base de datos
-  const movies = [
-    { title: 'Brazzers House', description: 'La increble serie de brazzers' },
-    { title: 'Movie 2', description: 'Description 2' },
-    { title: 'Movie 3', description: 'Description 3' },
-  ];
+  const categories = {
+    'AÑADIDAS RECIENTEMENTE': [
+      { title: 'Intensamente 2', description: 'Precio: Q.25.00', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 2', description: 'Description 2', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 3', description: 'Description 3', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 4', description: 'Description 4', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 5', description: 'Description 5', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+    ],
+    'TERROR': [
+      { title: 'Movie 6', description: 'Description 6', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 7', description: 'Description 7', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 8', description: 'Description 8', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 9', description: 'Description 9', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 10', description: 'Description 10', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+    ],
+    'COMEDIA': [
+      { title: 'Movie 11', description: 'Description 11', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 12', description: 'Description 12', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 13', description: 'Description 13', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 14', description: 'Description 14', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 15', description: 'Description 15', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+    ],
+  };
 
   const [show, setShow] = useState(false);
 
@@ -23,7 +42,7 @@ const MainPage = () => {
         <div className="header">
           <button className="btn btn-outline-light menu-button" onClick={handleShow}>
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="50" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M2.5 12.5a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1h-11zm0-5a.5.5 0 0 0 0 1h11a.5.5.5 0 0 0 0-1h-11zm0-5a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1h-11z"/>
+              <path fillRule="evenodd" d="M2.5 12.5a.5.5 0 0 0 0 1h11a.5.5.5 0 0 0 0-1h-11zm0-5a.5.5.5 0 0 0 0 1h11a.5.5.5 0 0 0 0-1h-11zm0-5a.5.5.5 0 0 0 0 1h11a.5.5.5 0 0 0 0-1h-11z"/>
             </svg>
           </button>
           <h2 className="netflix-title">PopCornFlix</h2>
@@ -42,28 +61,43 @@ const MainPage = () => {
           </Offcanvas.Body>
         </Offcanvas>
         <div className="carousel-section">
-          <Carousel />
+          <Banner />
         </div>
-        <div className="movies-section">
-          <Row>
-            {movies.map((movie, index) => (
-              <Col key={index} md={4}>
-                <Card className="dark-card">
-                  <Card.Body>
-                    <Card.Title>{movie.title}</Card.Title>
-                    <Card.Text>{movie.description}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </div>
+        {Object.entries(categories).map(([category, movies]) => (
+          <div className="movies-section" key={category}>
+            <h3 className="category-title">{category}</h3>
+            <Carousel interval={null} indicators={false}>
+              {movies.reduce((rows, movie, index) => {
+                if (index % 5 === 0) rows.push([]);
+                rows[rows.length - 1].push(movie);
+                return rows;
+              }, []).map((row, rowIndex) => (
+                <Carousel.Item key={rowIndex}>
+                  <Row className="justify-content-center">
+                    {row.map((movie, colIndex) => (
+                      <Col key={colIndex} xs={6} sm={4} md={3} lg={2} className="mb-2">
+                        <FlipCard
+                          image={movie.image}
+                          title={movie.title}
+                          description={movie.description}
+                          buttonText={movie.buttonText}
+                        />
+                      </Col>
+                    ))}
+                  </Row>
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          </div>
+        ))}
       </Container>
     </div>
   );
 };
 
 export default MainPage;
+
+
 
 
 
