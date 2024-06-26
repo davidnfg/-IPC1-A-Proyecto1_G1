@@ -1,0 +1,66 @@
+
+.comments-modal{
+    background-color: #000;
+    color: aliceblue;
+  }
+  
+  .comments-modal-header,
+  .comments-modal-footer {
+    border-color: #444;
+  }
+  
+  .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    color: #fff;
+    border-color: #444;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+  }
+  
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: #aaa;
+  }
+  
+  .btn-primary {
+    border: 0;
+    color: #121212;
+    outline: 0;
+    padding: 8px 20px;
+    display: inline-flex;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #b20710;
+    border-color: #b20710;
+  }
+  
+  .btn-danger {
+    border: 0;
+    color: #121212;
+    outline: 0;
+    padding: 8px 20px;
+    display: inline-flex;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  

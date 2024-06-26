@@ -5,29 +5,31 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/MainPage.css'; // Asegúrate de importar tu archivo CSS
 import Banner from './Hero'; 
 import FlipCard from './FlipCard';
+const btn1 = "Alquilar"
+const btn2 = "Comentar"
 
 const MainPage = () => {
   const categories = {
     'AÑADIDAS RECIENTEMENTE': [
-      { title: 'Intensamente 2', description: 'Precio: Q.25.00', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
-      { title: 'Movie 2', description: 'Description 2', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
-      { title: 'Movie 3', description: 'Description 3', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
-      { title: 'Movie 4', description: 'Description 4', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
-      { title: 'Movie 5', description: 'Description 5', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Intensamente 2', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2) },
+      { title: 'Movie 2', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
+      { title: 'Movie 3', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
+      { title: 'Movie 4', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
+      { title: 'Movie 5', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
     ],
     'TERROR': [
-      { title: 'Movie 6', description: 'Description 6', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
-      { title: 'Movie 7', description: 'Description 7', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
-      { title: 'Movie 8', description: 'Description 8', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
-      { title: 'Movie 9', description: 'Description 9', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
-      { title: 'Movie 10', description: 'Description 10', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 6', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
+      { title: 'Movie 7', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
+      { title: 'Movie 8', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
+      { title: 'Movie 9', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
+      { title: 'Movie 10', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
     ],
     'COMEDIA': [
-      { title: 'Movie 11', description: 'Description 11', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
-      { title: 'Movie 12', description: 'Description 12', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
-      { title: 'Movie 13', description: 'Description 13', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
-      { title: 'Movie 14', description: 'Description 14', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
-      { title: 'Movie 15', description: 'Description 15', image: require('./images/intensamente2.jpg'), buttonText: 'Ver Más' },
+      { title: 'Movie 11', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
+      { title: 'Movie 12', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
+      { title: 'Movie 13', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
+      { title: 'Movie 14', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
+      { title: 'Movie 15', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
     ],
   };
 
@@ -54,7 +56,7 @@ const MainPage = () => {
           <Offcanvas.Body>
             <Nav defaultActiveKey="/home" className="flex-column">
               <Nav.Link href="/home">Historial de alquiler</Nav.Link>
-              <Nav.Link eventKey="link-1">Devolver Película</Nav.Link>
+              <Nav.Link eventKey="link-1">Tus Alquileres</Nav.Link>
               <Nav.Link eventKey="link-2">Editar Perfil</Nav.Link>
               <Nav.Link href='/'>Log Out</Nav.Link>
             </Nav>
@@ -80,7 +82,8 @@ const MainPage = () => {
                           image={movie.image}
                           title={movie.title}
                           description={movie.description}
-                          buttonText={movie.buttonText}
+                          btn1={movie.btn1}
+                          btn2={movie.btn2}
                         />
                       </Col>
                     ))}
