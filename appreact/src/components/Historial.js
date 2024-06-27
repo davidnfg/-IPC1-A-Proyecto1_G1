@@ -20,9 +20,7 @@ const Historial = () => {
     localStorage.setItem('Historial', JSON.stringify(updatedRentals));
 
     const storedMovies = JSON.parse(localStorage.getItem('moviesData')) || moviesData;
-    const category = Object.keys(moviesData).find(category =>
-      moviesData[category].some(movie => movie.title === returnedMovie.title)
-    );
+    const category = returnedMovie.category;
 
     if (category) {
       if (!storedMovies[category]) {

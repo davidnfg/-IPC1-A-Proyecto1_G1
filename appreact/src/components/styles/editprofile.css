@@ -1,0 +1,73 @@
+/* src/styles/editprofile.css */
+.dark-mode {
+    background-color: #121212;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 56px; /* Ajusta el padding para la altura del navbar */
+  }
+  
+  .navbar-transparent {
+    background-color: rgba(0, 0, 0, 0.5); /* Transparencia del navbar */
+  }
+  
+  .navbar-transparent .navbar-brand {
+    color: #e50914; /* Color del texto del navbar */
+  }
+  
+  .navbar-transparent .navbar-brand:hover {
+    color: #ffffff; /* Mantén el color del texto al pasar el cursor por encima */
+  }
+  
+  .netflix-title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 50px; /* Ajusta el margen para desplazar el título a la derecha */
+  }
+  
+  .edit-profile-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+  }
+  
+  .section-title {
+    color: #e50914;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .form-label {
+    color: #e50914;
+  }
+  
+  .form-control {
+    background-color: #333;
+    color: white;
+    border: 1px solid #444;
+  }
+  
+  .btn-primary {
+    background-color: #e50914;
+    border-color: #e50914;
+  }
+  
+  .btn-primary:hover {
+    background-color: #b20710;
+    border-color: #b20710;
+  }
+  
+  .mt-3 {
+    margin-top: 1rem !important;
+  }
+  

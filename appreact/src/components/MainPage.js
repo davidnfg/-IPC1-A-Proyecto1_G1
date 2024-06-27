@@ -81,7 +81,7 @@ const MainPage = () => {
           <Offcanvas.Body>
             <Nav defaultActiveKey="/home" className="flex-column">
               <Nav.Link href='/historial'>Tus Alquileres</Nav.Link>
-              <Nav.Link eventKey="link-2">Editar Perfil</Nav.Link>
+              <Nav.Link href='/editarperfil'>Editar Perfil</Nav.Link>
               <Nav.Link href='/'>Log Out</Nav.Link>
             </Nav>
           </Offcanvas.Body>
