@@ -2,37 +2,12 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Offcanvas, Nav, Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/MainPage.css'; // Asegúrate de importar tu archivo CSS
-import Banner from './Hero'; 
+import './styles/MainPage.css';
+import Banner from './Hero';
 import FlipCard from './FlipCard';
-const btn1 = "Alquilar"
-const btn2 = "Comentar"
+import moviesData from './moviesData';
 
 const MainPage = () => {
-  const categories = {
-    'AÑADIDAS RECIENTEMENTE': [
-      { title: 'Intensamente 2', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2) },
-      { title: 'Movie 2', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-      { title: 'Movie 3', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-      { title: 'Movie 4', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-      { title: 'Movie 5', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-    ],
-    'TERROR': [
-      { title: 'Movie 6', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-      { title: 'Movie 7', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-      { title: 'Movie 8', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-      { title: 'Movie 9', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-      { title: 'Movie 10', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-    ],
-    'COMEDIA': [
-      { title: 'Movie 11', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-      { title: 'Movie 12', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-      { title: 'Movie 13', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-      { title: 'Movie 14', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-      { title: 'Movie 15', description: "Precio: Q.25.00\nGenero: Infantil/Comedia\nDuración: 1h 36m", image: require('./images/intensamente2.jpg'), btn1: (btn1),btn2: (btn2)  },
-    ],
-  };
-
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -55,8 +30,7 @@ const MainPage = () => {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav defaultActiveKey="/home" className="flex-column">
-              <Nav.Link href="/home">Historial de alquiler</Nav.Link>
-              <Nav.Link eventKey="link-1">Tus Alquileres</Nav.Link>
+              <Nav.Link href='/historial'>Tus Alquileres</Nav.Link>
               <Nav.Link eventKey="link-2">Editar Perfil</Nav.Link>
               <Nav.Link href='/'>Log Out</Nav.Link>
             </Nav>
@@ -65,7 +39,7 @@ const MainPage = () => {
         <div className="carousel-section">
           <Banner />
         </div>
-        {Object.entries(categories).map(([category, movies]) => (
+        {Object.entries(moviesData).map(([category, movies]) => (
           <div className="movies-section" key={category}>
             <h3 className="category-title">{category}</h3>
             <Carousel interval={null} indicators={false}>
@@ -99,6 +73,7 @@ const MainPage = () => {
 };
 
 export default MainPage;
+
 
 
 

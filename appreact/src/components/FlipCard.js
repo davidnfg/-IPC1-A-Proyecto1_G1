@@ -5,7 +5,7 @@ import "./styles/FlipCard.css"
 
 
 
-const FlipCard = ({ image, title, description, btn1, btn2 }) => {
+const FlipCard = ({ image, title, description, btn1, btn2, onRent }) => {
   const [showComments, setShowComments] = useState(false);
 
   const handleShowComments = () => setShowComments(true);
@@ -15,10 +15,13 @@ const FlipCard = ({ image, title, description, btn1, btn2 }) => {
     Swal.fire({
       position: 'center',
       icon: 'success',
-      title: 'Pelicula alquilada, puedes revisar en Alquileres',
+      title: 'Pelicula alquilada, puedes revisar en\nTus Alquileres',
       showConfirmButton: false,
       timer: 3000
     });
+    const Historial = JSON.parse(localStorage.getItem('Historial')) || [];
+    Historial.push({ title });
+    localStorage.setItem('Historial', JSON.stringify(Historial));
   };
 
   return (

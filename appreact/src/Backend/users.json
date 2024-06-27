@@ -1,8 +1,10 @@
-[ {
-    "firstName": "pene",
-    "lastName": "grande",
-    "email": "pene@gmail.com",
-    "password": "pene",
-    "gender": "39 tipos de gay",
-    "birthDate": "12/12/12"
-}]
+[
+    {
+        "firstName": "pene",
+        "lastName": "grande",
+        "email": "pene@example.com",
+        "password": "pene",
+        "gender": "Masculino",
+        "birthDate": "29/12/1992"
+    }
+]

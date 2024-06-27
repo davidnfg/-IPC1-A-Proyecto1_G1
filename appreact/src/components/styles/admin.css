@@ -1,0 +1,54 @@
+/* src/styles/admin.css */
+.dark-modeA {
+    background-color: #121212;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 56px; /* Ajusta el padding para la altura del navbar */
+  }
+  
+  .navbar-transparent {
+    background-color: transparent; /* Transparencia del navbar */
+  }
+  
+  .navbar-transparent .navbar-brand,
+  .navbar-transparent .nav-link {
+    color: #e50914; /* Color del texto del navbar */
+  }
+  
+  .navbar-transparent .nav-link:hover {
+    color: #b20710; /* Color del texto del navbar al pasar el mouse */
+  }
+  
+  .netflix-titleA {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 50px; /* Ajusta el margen para desplazar el título a la derecha */
+  }
+  
+  .content-container {
+    padding-top: 60px; /* Añade un padding adicional para evitar que el contenido se superponga con el navbar */
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .section-title {
+    color: #e50914;
+    margin: 20px 0;
+  }
+  
+  .table {
+    margin-top: 20px;
+  }
+  
+  .btn-danger {
+    margin-right: 5px;
+  }
+  

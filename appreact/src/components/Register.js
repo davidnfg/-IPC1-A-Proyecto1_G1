@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import axios from 'axios'; // Importa Axios
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/Register.css';
 
@@ -25,18 +27,11 @@ const Register = () => {
     e.preventDefault();
     if (formData.firstName && formData.lastName && formData.email && formData.password && formData.gender) {
       try {
-        const response = await fetch('http://localhost:3000/auth/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-        });
-        const result = await response.json();
-        if (response.ok) {
+        const response = await axios.post('http://localhost:3000/register', formData); 
+        if (response.status === 201) {
           Swal.fire({
             title: "Hecho!",
-            text: result.message,
+            text: response.data.message,
             icon: "success"
           }).then(() => {
             navigate('/');
@@ -45,7 +40,7 @@ const Register = () => {
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: result.message,
+            text: response.data.message,
           });
         }
       } catch (error) {
@@ -121,7 +116,7 @@ const Register = () => {
               </Form.Group>
 
               <Form.Group controlId="formGender" className="mb-3">
-                <Form.Label>Genero</Form.Label>
+                <Form.Label>Género</Form.Label>
                 <Form.Control
                   as="select"
                   name="gender"
@@ -129,7 +124,7 @@ const Register = () => {
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Selecciona tu genero</option>
+                  <option value="">Selecciona tu género</option>
                   <option value="Masculino">Masculino</option>
                   <option value="Femenino">Femenino</option>
                   <option value="Otro">Otro</option>
