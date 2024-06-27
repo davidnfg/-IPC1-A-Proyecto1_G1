@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Offcanvas, Nav, Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/MainPage.css';
@@ -9,9 +8,60 @@ import moviesData from './moviesData';
 
 const MainPage = () => {
   const [show, setShow] = useState(false);
+  const [visibleMovies, setVisibleMovies] = useState({});
+  const [rentedMovies, setRentedMovies] = useState([]);
+
+  useEffect(() => {
+    const storedMovies = JSON.parse(localStorage.getItem('moviesData')) || moviesData;
+    const storedRentedMovies = JSON.parse(localStorage.getItem('rentedMovies')) || [];
+    setVisibleMovies(storedMovies);
+    setRentedMovies(storedRentedMovies);
+  }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storedMovies = JSON.parse(localStorage.getItem('moviesData')) || moviesData;
+      const storedRentedMovies = JSON.parse(localStorage.getItem('rentedMovies')) || [];
+      setVisibleMovies(storedMovies);
+      setRentedMovies(storedRentedMovies);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleRent = (title) => {
+    const updatedMovies = { ...visibleMovies };
+    let rentedMovie = null;
+    Object.keys(updatedMovies).forEach(category => {
+      updatedMovies[category] = updatedMovies[category].filter(movie => {
+        if (movie.title === title) {
+          rentedMovie = movie;
+          return false;
+        }
+        return true;
+      });
+    });
+
+    if (rentedMovie) {
+      setVisibleMovies(updatedMovies);
+      const updatedRentedMovies = [...rentedMovies, rentedMovie];
+      setRentedMovies(updatedRentedMovies);
+      localStorage.setItem('moviesData', JSON.stringify(updatedMovies));
+      localStorage.setItem('rentedMovies', JSON.stringify(updatedRentedMovies));
+
+      // Add to rental history
+      const rentalHistory = JSON.parse(localStorage.getItem('Historial')) || [];
+      rentalHistory.push(rentedMovie);
+      localStorage.setItem('Historial', JSON.stringify(rentalHistory));
+    }
+  };
 
   return (
     <div className="dark-mode">
@@ -39,7 +89,7 @@ const MainPage = () => {
         <div className="carousel-section">
           <Banner />
         </div>
-        {Object.entries(moviesData).map(([category, movies]) => (
+        {Object.entries(visibleMovies).map(([category, movies]) => (
           <div className="movies-section" key={category}>
             <h3 className="category-title">{category}</h3>
             <Carousel interval={null} indicators={false}>
@@ -58,6 +108,8 @@ const MainPage = () => {
                           description={movie.description}
                           btn1={movie.btn1}
                           btn2={movie.btn2}
+                          onRent={handleRent}
+                          visible={!rentedMovies.some(rented => rented.title === movie.title)}
                         />
                       </Col>
                     ))}
@@ -73,12 +125,3 @@ const MainPage = () => {
 };
 
 export default MainPage;
-
-
-
-
-
-
-
-
-

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import Swal from 'sweetalert2';
-import axios from 'axios'; // Importa Axios
+import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/Register.css';
@@ -27,7 +27,7 @@ const Register = () => {
     e.preventDefault();
     if (formData.firstName && formData.lastName && formData.email && formData.password && formData.gender) {
       try {
-        const response = await axios.post('http://localhost:3000/register', formData); 
+        const response = await axios.post('http://localhost:5000/register', formData); 
         if (response.status === 201) {
           Swal.fire({
             title: "Hecho!",

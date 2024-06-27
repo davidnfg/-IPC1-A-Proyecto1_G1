@@ -1,21 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Navbar, Nav, Table, Button } from 'react-bootstrap';
+import { Container, Navbar, Table, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/Historial.css';
+import moviesData from './moviesData';
 
 const Historial = () => {
   const [rentals, setRentals] = useState([]);
 
   useEffect(() => {
-    // Recuperar los datos del historial desde el almacenamiento local al montar el componente
     const storedRentals = JSON.parse(localStorage.getItem('Historial')) || [];
     setRentals(storedRentals);
   }, []);
 
   const handleReturn = (index) => {
     const updatedRentals = rentals.filter((_, i) => i !== index);
+    const returnedMovie = rentals[index];
+
     setRentals(updatedRentals);
     localStorage.setItem('Historial', JSON.stringify(updatedRentals));
+
+    const storedMovies = JSON.parse(localStorage.getItem('moviesData')) || moviesData;
+    const category = Object.keys(moviesData).find(category =>
+      moviesData[category].some(movie => movie.title === returnedMovie.title)
+    );
+
+    if (category) {
+      if (!storedMovies[category]) {
+        storedMovies[category] = [];
+      }
+      storedMovies[category].push(returnedMovie);
+      localStorage.setItem('moviesData', JSON.stringify(storedMovies));
+
+      const updatedRentedMovies = JSON.parse(localStorage.getItem('rentedMovies')) || [];
+      const filteredRentedMovies = updatedRentedMovies.filter(movie => movie.title !== returnedMovie.title);
+      localStorage.setItem('rentedMovies', JSON.stringify(filteredRentedMovies));
+
+      window.dispatchEvent(new Event('storage'));
+    }
   };
 
   return (
@@ -51,4 +72,3 @@ const Historial = () => {
 };
 
 export default Historial;
-

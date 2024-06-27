@@ -1,11 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import CommentsModal from './CommentsModal';
-import "./styles/FlipCard.css"
+import './styles/FlipCard.css';
 
-
-
-const FlipCard = ({ image, title, description, btn1, btn2, onRent }) => {
+const FlipCard = ({ image, title, description, btn1, btn2, onRent, visible }) => {
   const [showComments, setShowComments] = useState(false);
 
   const handleShowComments = () => setShowComments(true);
@@ -19,12 +17,11 @@ const FlipCard = ({ image, title, description, btn1, btn2, onRent }) => {
       showConfirmButton: false,
       timer: 3000
     });
-    const Historial = JSON.parse(localStorage.getItem('Historial')) || [];
-    Historial.push({ title });
-    localStorage.setItem('Historial', JSON.stringify(Historial));
+
+    onRent(title);
   };
 
-  return (
+  return visible ? (
     <div className="flip-card">
       <div className="flip-card-inner">
         <div className="flip-card-front">
@@ -32,14 +29,14 @@ const FlipCard = ({ image, title, description, btn1, btn2, onRent }) => {
         </div>
         <div className="flip-card-back">
           <h3>{title}</h3>
-          <p>{description}</p>
+          <p style={{ whiteSpace: 'pre-wrap' }}>{description}</p>
           <button className="btn btn-outline-light action-button" onClick={handleRent}>{btn1}</button>
           <button className="btn btn-outline-light action-button" onClick={handleShowComments}>{btn2}</button>
         </div>
       </div>
       <CommentsModal show={showComments} handleClose={handleCloseComments} title={title} />
     </div>
-  );
+  ) : null;
 };
 
 export default FlipCard;
