@@ -1,10 +1,1 @@
-[
-  {
-    "firstName": "David",
-    "lastName": "Fabro",
-    "email": "fabrodavid9@gmail.com",
-    "password": "Gamerpro1*",
-    "gender": "Masculino",
-    "birthDate": "1800-02-20"
-  }
-]
+[{"firstName":"David","lastName":"Guzmán","email":"fabrodavid9@gmail.com","password":"Gamerpro1*","gender":"Masculino","birthDate":"2005-02-20"},{"firstName":"Jorge","lastName":"Andres","email":"megustaelanime@hotmail.com","password":"Gamerpro1*","gender":"Masculino","birthDate":"2005-01-01"}]

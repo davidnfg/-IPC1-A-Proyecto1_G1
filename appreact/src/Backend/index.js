@@ -160,15 +160,16 @@ app.put("/admin/:id", (req, res) => {
   });
 });
 
-// Endpoint el cual retorna un usuario en especifico a partir de su correo
-app.get("/users/:correo", (req, res) => {
-  const correo = req.params.correo;
-  const user = dataUsers.find((user) => user.email === correo);
+// Endpoint para obtener datos de un usuario por su correo
+app.get("/users/:email", (req, res) => {
+  const { email } = req.params;
+  const user = dataUsers.find(user => user.email === email);
+
   if (!user) {
-    res.status(404).send({ response: "Elemento no encontrado" });
-  } else {
-    res.json(user);
+    return res.status(404).json({ success: false, message: "Usuario no encontrado." });
   }
+
+  res.status(200).json({ success: true, user });
 });
 
 // Logica Registro
@@ -219,7 +220,7 @@ app.post("/login", (req, res) => {
 // Editar
 // Perfil
 app.put("/editarperfil", (req, res) => {
-  const { firstName, lastName, email, password, gender, birthDate } = req.body;
+  const { firstName, lastName, email, password, birthDate } = req.body;
 
   const editUserIndex = dataUsers.findIndex((user) => user.email === email);
   if (editUserIndex === -1) {
@@ -229,9 +230,9 @@ app.put("/editarperfil", (req, res) => {
     });
   }
 
+  // Actualizar campos
   dataUsers[editUserIndex].firstName = firstName;
   dataUsers[editUserIndex].lastName = lastName;
-  dataUsers[editUserIndex].gender = gender;
   dataUsers[editUserIndex].birthDate = birthDate;
   if (password) {
     dataUsers[editUserIndex].password = password;
@@ -243,6 +244,7 @@ app.put("/editarperfil", (req, res) => {
     message: "Perfil actualizado.",
   });
 });
+
 
 // Encender servidor
 app.listen(PORT, () => {

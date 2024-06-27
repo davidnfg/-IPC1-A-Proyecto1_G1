@@ -3,6 +3,7 @@ import { Form, Button, Container, Navbar } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/editprofile.css';
+import axios from 'axios';
 
 const EditProfile = () => {
   const [userProfile, setUserProfile] = useState({
@@ -14,14 +15,19 @@ const EditProfile = () => {
   });
 
   useEffect(() => {
-    const storedUserProfile = JSON.parse(localStorage.getItem('userProfile')) || {
-      firstName: '',
-      lastName: '',
-      email: '',
-      birthDate: '',
-      password: ''
-    };
-    setUserProfile(storedUserProfile);
+    const storedUserProfile = JSON.parse(localStorage.getItem('userProfile'));
+
+    if (storedUserProfile && storedUserProfile.email) {
+      axios.get(`http://localhost:5000/users/${storedUserProfile.email}`)
+        .then(response => {
+          if (response.data.success) {
+            setUserProfile(response.data.user);
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching user profile:", error);
+        });
+    }
   }, []);
 
   const handleChange = (e) => {
@@ -34,23 +40,46 @@ const EditProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedProfile = { ...userProfile };
-    delete updatedProfile.password; // Remove password before storing
 
-    localStorage.setItem('userProfile', JSON.stringify(updatedProfile));
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Perfil actualizado correctamente',
-      showConfirmButton: false,
-      timer: 3000
-    });
+    axios.put('http://localhost:5000/editarperfil', userProfile)
+      .then(response => {
+        if (response.data.success) {
+          const updatedProfile = { ...userProfile };
+          delete updatedProfile.password; // Remove password before storing
 
+          localStorage.setItem('userProfile', JSON.stringify(updatedProfile));
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Perfil actualizado correctamente',
+            showConfirmButton: false,
+            timer: 3000
+          });
 
-    setUserProfile({
-      ...userProfile,
-      password: ''
-    });
+          setUserProfile({
+            ...userProfile,
+            password: ''
+          });
+        } else {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Error al actualizar el perfil',
+            text: response.data.message,
+            showConfirmButton: true
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error updating profile:", error);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Error al actualizar el perfil',
+          text: error.message,
+          showConfirmButton: true
+        });
+      });
   };
 
   return (

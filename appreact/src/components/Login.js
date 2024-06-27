@@ -1,34 +1,41 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/Login.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles/Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Redirigir a /admin si el correo y la contraseña son "admin"+
+    if (email === "admin@admin.com" && password === "admin") {
+      navigate("/admin");
+      return;
+    }
+
     if (email && password) {
       try {
         //
-        const response = await fetch('http://localhost:5000/login', {
-          method: 'POST',
+        const response = await fetch("http://localhost:5000/login", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password })
+          body: JSON.stringify({ email, password }),
         });
         const result = await response.json();
         if (response.ok) {
           Swal.fire({
             title: "Bienvenido!",
             text: result.message,
-            icon: "success"
+            icon: "success",
           }).then(() => {
-            navigate('/main');
+            navigate("/main");
           });
         } else {
           Swal.fire({
@@ -54,7 +61,7 @@ const Login = () => {
   };
 
   const handleRegister = () => {
-    navigate('/register');
+    navigate("/register");
   };
 
   return (
@@ -63,7 +70,7 @@ const Login = () => {
         <div className="card">
           <div className="card-body">
             <h2 className="card-title text-center mb-4">Inicio de Sesión</h2>
-            <form onSubmit={handleSubmit} className='form-signin w-100 m-auto'>
+            <form onSubmit={handleSubmit} className="form-signin w-100 m-auto">
               <div className="form-floating mb-3" style={{ width: "100%" }}>
                 <input
                   type="email"
@@ -89,10 +96,21 @@ const Login = () => {
                 <label htmlFor="floatingPassword">Contraseña</label>
               </div>
               <div className="text-center mb-3">
-                <button type="submit" className="btn btn-outline-primary btn-lg">Iniciar Sesión</button>
+                <button
+                  type="submit"
+                  className="btn btn-outline-primary btn-lg"
+                >
+                  Iniciar Sesión
+                </button>
               </div>
               <div className="text-center">
-                <button type="button" className="btn btn-link" onClick={handleRegister}>Registrarse</button>
+                <button
+                  type="button"
+                  className="btn btn-link"
+                  onClick={handleRegister}
+                >
+                  Registrarse
+                </button>
               </div>
             </form>
           </div>
