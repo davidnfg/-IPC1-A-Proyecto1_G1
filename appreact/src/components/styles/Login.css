@@ -8,9 +8,13 @@
     align-items: center;
   }
   
-  .card {
-    background: rgba(255, 255, 255, 0.8);
+  .cardL {
+    background: rgba(0, 0, 0, 0.8);
     border-radius: 10px;
     padding: 20px;
+    color: white;
+  }
+  .textL{
+    color: white;
   }
   

@@ -62,9 +62,9 @@ const Register = () => {
   return (
     <div className="register-background">
       <div className="container h-100 d-flex justify-content-center align-items-center">
-        <div className="card">
+        <div className="cardR">
           <div className="card-body">
-            <h2 className="card-title text-center mb-4">Registro</h2>
+            <h2 className="textR">Registro</h2>
             <Form onSubmit={handleSubmit}>
               <Row className="mb-3">
                 <Col>

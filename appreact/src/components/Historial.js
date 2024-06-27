@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Navbar, Table, Button } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/Historial.css';
 import moviesData from './moviesData';
@@ -13,28 +14,49 @@ const Historial = () => {
   }, []);
 
   const handleReturn = (index) => {
-    const updatedRentals = rentals.filter((_, i) => i !== index);
-    const returnedMovie = rentals[index];
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, devolver!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const updatedRentals = rentals.filter((_, i) => i !== index);
+        const returnedMovie = rentals[index];
 
-    setRentals(updatedRentals);
-    localStorage.setItem('Historial', JSON.stringify(updatedRentals));
+        setRentals(updatedRentals);
+        localStorage.setItem('Historial', JSON.stringify(updatedRentals));
 
-    const storedMovies = JSON.parse(localStorage.getItem('moviesData')) || moviesData;
-    const category = returnedMovie.category;
+        const storedMovies = JSON.parse(localStorage.getItem('moviesData')) || moviesData;
+        const category = returnedMovie.category;
 
-    if (category) {
-      if (!storedMovies[category]) {
-        storedMovies[category] = [];
+        if (category) {
+          if (!storedMovies[category]) {
+            storedMovies[category] = [];
+          }
+          storedMovies[category].push(returnedMovie);
+          localStorage.setItem('moviesData', JSON.stringify(storedMovies));
+
+          const updatedRentedMovies = JSON.parse(localStorage.getItem('rentedMovies')) || [];
+          const filteredRentedMovies = updatedRentedMovies.filter(movie => movie.title !== returnedMovie.title);
+          localStorage.setItem('rentedMovies', JSON.stringify(filteredRentedMovies));
+
+          window.dispatchEvent(new Event('storage'));
+        }
+
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Película devuelta con éxito',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
-      storedMovies[category].push(returnedMovie);
-      localStorage.setItem('moviesData', JSON.stringify(storedMovies));
-
-      const updatedRentedMovies = JSON.parse(localStorage.getItem('rentedMovies')) || [];
-      const filteredRentedMovies = updatedRentedMovies.filter(movie => movie.title !== returnedMovie.title);
-      localStorage.setItem('rentedMovies', JSON.stringify(filteredRentedMovies));
-
-      window.dispatchEvent(new Event('storage'));
-    }
+    });
   };
 
   return (

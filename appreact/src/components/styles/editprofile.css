@@ -1,5 +1,5 @@
-/* src/styles/editprofile.css */
-.dark-mode {
+
+.dark-modeE {
     background-color: #121212;
     background-size: cover;
     background-position: center;
@@ -9,27 +9,27 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 56px; /* Ajusta el padding para la altura del navbar */
+    padding-top: 56px; 
   }
   
   .navbar-transparent {
-    background-color: rgba(0, 0, 0, 0.5); /* Transparencia del navbar */
+    background-color: rgba(0, 0, 0, 0.5);
   }
   
   .navbar-transparent .navbar-brand {
-    color: #e50914; /* Color del texto del navbar */
+    color: #e50914; 
   }
   
   .navbar-transparent .navbar-brand:hover {
-    color: #ffffff; /* Mantén el color del texto al pasar el cursor por encima */
+    color: #ffffff; 
   }
   
-  .netflix-title {
+  .netflix-titleH {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 1.5em;
     font-weight: bold;
     text-transform: uppercase;
-    margin-left: 50px; /* Ajusta el margen para desplazar el título a la derecha */
+    margin-left: 50px; 
   }
   
   .edit-profile-container {

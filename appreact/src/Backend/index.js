@@ -134,7 +134,7 @@ app.post("/movies", (req, res) => {
 });
 
 // Endpoint para actualizar una película por ID
-app.put("/admin/:id", (req, res) => {
+app.put("/movies/:id", (req, res) => {
   const movieId = parseInt(req.params.id);
   const { category, title, description } = req.body;
   const movieIndex = dataMovies.findIndex((movie) => movie.id === movieId);

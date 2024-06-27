@@ -1,16 +1,40 @@
 .register-background {
-    background-image: url(../images/fondoRegis.jpeg); /* Aquí puedes poner la URL de tu imagen de fondo */
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .card {
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    padding: 20px;
-  }
-  
+  background-image: url(../images/fondoRegis.jpeg); 
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.cardR {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+}
+
+.textR {
+  color: red;
+}
+
+.white-text {
+  color: white !important;
+}
+
+
+::placeholder {
+  color: white !important;
+  opacity: 1;
+}
+
+
+:-ms-input-placeholder {
+  color: white !important;
+}
+
+::-ms-input-placeholder {
+  color: white !important;
+}

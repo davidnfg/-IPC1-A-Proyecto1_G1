@@ -67,16 +67,16 @@ const Login = () => {
   return (
     <div className="login-background">
       <div className="container h-100 d-flex justify-content-center align-items-center">
-        <div className="card">
+        <div className="cardL">
           <div className="card-body">
-            <h2 className="card-title text-center mb-4">Inicio de Sesión</h2>
+            <h2 className="textL">Inicio de Sesión</h2>
             <form onSubmit={handleSubmit} className="form-signin w-100 m-auto">
               <div className="form-floating mb-3" style={{ width: "100%" }}>
                 <input
                   type="email"
                   className="form-control"
                   id="floatingInput"
-                  placeholder="example@correo.com"
+                  placeholder=""
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   required

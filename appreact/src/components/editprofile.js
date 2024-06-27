@@ -45,7 +45,7 @@ const EditProfile = () => {
       .then(response => {
         if (response.data.success) {
           const updatedProfile = { ...userProfile };
-          delete updatedProfile.password; // Remove password before storing
+          delete updatedProfile.password; // limpia la contra
 
           localStorage.setItem('userProfile', JSON.stringify(updatedProfile));
           Swal.fire({
@@ -53,7 +53,7 @@ const EditProfile = () => {
             icon: 'success',
             title: 'Perfil actualizado correctamente',
             showConfirmButton: false,
-            timer: 3000
+            timer: 1500
           });
 
           setUserProfile({
@@ -83,9 +83,9 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="dark-mode">
+    <div className="dark-modeH">
       <Navbar className="navbar-transparent" expand="lg" fixed="top">
-        <Navbar.Brand href="/main" className="netflix-title">PopCornFlix</Navbar.Brand>
+        <Navbar.Brand href="/main" className="netflix-titleH">PopCornFlix</Navbar.Brand>
       </Navbar>
       <Container className="edit-profile-container">
         <h2 className="section-title">Editar Perfil</h2>

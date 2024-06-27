@@ -12,6 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/admin.css";
 import moviesData from "./moviesData";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState("usuarios");
@@ -74,7 +75,7 @@ const Admin = () => {
       category: newMovie.category,
       title: newMovie.title,
       description: newMovie.description,
-      image: await toBase64(newMovie.image), // Convertir la imagen a base64
+      image: await toBase64(newMovie.image), 
     };
 
     try {
@@ -84,11 +85,11 @@ const Admin = () => {
         },
       });
 
-      // Actualizar las películas en localStorage
+    
       const updatedMovies = { ...movies };
       updatedMovies[newMovie.category] = updatedMovies[newMovie.category] || [];
       const newMovieToAdd = {
-        id: new Date().getTime(), // Usar timestamp como ID único
+        id: new Date().getTime(), //usar timestamp pa el id
         title: newMovie.title,
         description: newMovie.description,
         image: newMovieData.image,
@@ -106,6 +107,14 @@ const Admin = () => {
         description: "",
         image: null,
       });
+
+      // SweetAlert2 success alert
+      Swal.fire({
+        icon: 'success',
+        title: '¡Película agregada!',
+        text: 'La película se ha agregado correctamente.',
+      });
+
     } catch (error) {
       console.error("Error adding movie:", error);
     }
@@ -232,7 +241,8 @@ const Admin = () => {
           <div className="movies-section">
             <h2 className="section-title">Películas Existentes</h2>
             <Button
-              variant="success"
+              className="btn btn-danger"
+              
               onClick={() => setShowAddMovieModal(true)}
             >
               Agregar película
@@ -341,88 +351,6 @@ const Admin = () => {
           </Button>
           <Button variant="primary" onClick={handleAddMovie}>
             Agregar Película
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      <Modal
-        show={showUpdateMovieModal}
-        onHide={() => setShowUpdateMovieModal(false)}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Actualizar Película</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedMovie && (
-            <Form>
-              <Form.Group controlId="formMovieCategory">
-                <Form.Label>Categoría</Form.Label>
-                <Form.Control
-                  as="select"
-                  value={selectedMovie.category}
-                  onChange={(e) =>
-                    setSelectedMovie({
-                      ...selectedMovie,
-                      category: e.target.value,
-                    })
-                  }
-                >
-                  <option value="NUEVAS">NUEVAS</option>
-                  <option value="TERROR">TERROR</option>
-                  <option value="COMEDIA">COMEDIA</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group controlId="formMovieTitle">
-                <Form.Label>Título</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={selectedMovie.title}
-                  onChange={(e) =>
-                    setSelectedMovie({
-                      ...selectedMovie,
-                      title: e.target.value,
-                    })
-                  }
-                />
-              </Form.Group>
-              <Form.Group controlId="formMovieDescription">
-                <Form.Label>Descripción</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  value={selectedMovie.description}
-                  onChange={(e) =>
-                    setSelectedMovie({
-                      ...selectedMovie,
-                      description: e.target.value,
-                    })
-                  }
-                />
-              </Form.Group>
-              <Form.Group controlId="formMovieImage">
-                <Form.Label>Imagen</Form.Label>
-                <Form.Control
-                  type="file"
-                  onChange={(e) =>
-                    setSelectedMovie({
-                      ...selectedMovie,
-                      image: e.target.files[0] || selectedMovie.image,
-                    })
-                  }
-                />
-              </Form.Group>
-            </Form>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => setShowUpdateMovieModal(false)}
-          >
-            Cancelar
-          </Button>
-          <Button variant="primary" onClick={handleUpdateMovie}>
-            Actualizar Película
           </Button>
         </Modal.Footer>
       </Modal>
